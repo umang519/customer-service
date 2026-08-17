@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>Create Employee Onboarding Record {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Employee Onboarding Record</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_Onboarding_Record</name>
+        <label>Create Onboarding Record</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <inputAssignments>
+            <field>Employee_Name__c</field>
+            <value>
+                <elementReference>EmployeeNameInput</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Onboarding_Start_Date__c</field>
+            <value>
+                <elementReference>OnboardingStartDateInput</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Employee_Onboarding_Record__c</object>
+    </recordCreates>
+    <screens>
+        <name>Screen_Input_Details</name>
+        <label>Employee Onboarding Details</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Create_Onboarding_Record</targetReference>
+        </connector>
+        <fields>
+            <name>EmployeeNameInput</name>
+            <dataType>String</dataType>
+            <fieldText>Employee Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>OnboardingStartDateInput</name>
+            <dataType>Date</dataType>
+            <fieldText>Onboarding Start Date</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Screen_Input_Details</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
