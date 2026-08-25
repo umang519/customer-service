@@ -1,0 +1,10 @@
+.section-header {
+    color: var(--slds-g-color-neutral-base-50, #747474);
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+}
+
+lightning-output-field,
+lightning-input-field {
+    --slds-c-output-form-label-font-weight: 600;
+}
