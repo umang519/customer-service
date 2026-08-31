@@ -1,33 +1,39 @@
 <template>
     <lightning-card title="Lead Assignment" icon-name="standard:lead">
-        <div class="slds-p-horizontal_medium slds-p-vertical_small">
-            <template lwc:if={lead.data}>
-                <div class="slds-form-element slds-m-bottom_small">
-                    <label class="slds-form-element__label">Owner</label>
-                    <div class="slds-form-element__control">{ownerName}</div>
-                </div>
-                <div class="slds-form-element slds-m-bottom_small">
-                    <label class="slds-form-element__label">Region</label>
-                    <div class="slds-form-element__control">{region}</div>
-                </div>
-                <div class="slds-form-element slds-m-bottom_small">
-                    <label class="slds-form-element__label">Industry</label>
-                    <div class="slds-form-element__control">{industry}</div>
-                </div>
-                <div class="slds-form-element slds-m-bottom_small">
-                    <label class="slds-form-element__label">Status</label>
-                    <div class="slds-form-element__control">{status}</div>
-                </div>
-                <lightning-button
-                    variant="brand"
-                    label="Assign to Me"
-                    title="Assign this lead to me"
-                    onclick={handleAssignToMe}
-                    disabled={isAssignDisabled}>
-                </lightning-button>
+        <div class="slds-m-around_medium">
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Loading lead details" size="small"></lightning-spinner>
             </template>
-            <template lwc:elseif={lead.error}>
+            <template lwc:elseif={hasError}>
                 <div class="slds-text-color_error">{errorMessage}</div>
+            </template>
+            <template lwc:else>
+                <dl class="slds-dl_horizontal">
+                    <dt class="slds-dl_horizontal__label">Owner:</dt>
+                    <dd class="slds-dl_horizontal__detail">{ownerName}</dd>
+
+                    <dt class="slds-dl_horizontal__label">Region:</dt>
+                    <dd class="slds-dl_horizontal__detail">{region}</dd>
+
+                    <dt class="slds-dl_horizontal__label">Industry:</dt>
+                    <dd class="slds-dl_horizontal__detail">{industry}</dd>
+
+                    <dt class="slds-dl_horizontal__label">Status:</dt>
+                    <dd class="slds-dl_horizontal__detail">{status}</dd>
+                </dl>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button
+                        label="Assign to Me"
+                        variant="brand"
+                        onclick={handleAssignToMe}
+                        disabled={isButtonDisabled}>
+                    </lightning-button>
+                </div>
+
+                <template lwc:if={isAssignedToMe}>
+                    <p class="slds-text-color_weak slds-m-top_x-small">This lead is already assigned to you.</p>
+                </template>
             </template>
         </div>
     </lightning-card>
