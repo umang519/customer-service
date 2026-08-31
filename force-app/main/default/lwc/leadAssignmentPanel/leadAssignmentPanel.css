@@ -1,0 +1,10 @@
+.lead-info-row {
+    padding: var(--lwc-spacingXxSmall) 0;
+}
+
+.lead-field-label {
+    color: var(--lwc-colorTextLabel);
+    font-size: var(--lwc-fontSizeTextXSmall);
+    letter-spacing: 0.0625rem;
+    text-transform: uppercase;
+}
