@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flexipageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>opportunityPipelineChart</componentName>
+                <identifier>opportunityPipelineChart</identifier>
+                <properties>
+                    <name>chartType</name>
+                    <value>bar</value>
+                </properties>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexipageRegions>
+    <masterLabel>Home Page</masterLabel>
+    <template>
+        <name>home:desktopTemplate</name>
+    </template>
+    <type>HomePage</type>
+</FlexiPage>
