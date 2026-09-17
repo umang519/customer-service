@@ -1,49 +1,57 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue, getFieldDisplayValue } from 'lightning/uiRecordApi';
-import LEAD_OWNER_ID from '@salesforce/schema/Lead.OwnerId';
-import LEAD_REGION from '@salesforce/schema/Lead.Region__c';
-import LEAD_INDUSTRY from '@salesforce/schema/Lead.Industry';
-import LEAD_SOURCE from '@salesforce/schema/Lead.LeadSource';
-import LEAD_STATUS from '@salesforce/schema/Lead.Status';
+import REGION_FIELD from '@salesforce/schema/Lead.Region__c';
+import INDUSTRY_FIELD from '@salesforce/schema/Lead.Industry';
+import LEAD_SOURCE_FIELD from '@salesforce/schema/Lead.LeadSource';
+import OWNER_NAME_FIELD from '@salesforce/schema/Lead.Owner.Name';
+import STATUS_FIELD from '@salesforce/schema/Lead.Status';
 
-const LEAD_FIELDS = [LEAD_OWNER_ID, LEAD_REGION, LEAD_INDUSTRY, LEAD_SOURCE, LEAD_STATUS];
+const LEAD_FIELDS = [
+    REGION_FIELD,
+    INDUSTRY_FIELD,
+    LEAD_SOURCE_FIELD,
+    OWNER_NAME_FIELD,
+    STATUS_FIELD
+];
 
 export default class LeadRoutingSummary extends LightningElement {
     @api recordId;
 
     @wire(getRecord, { recordId: '$recordId', fields: LEAD_FIELDS })
-    wiredLead;
+    lead;
 
     get isLoading() {
-        return !this.wiredLead.data && !this.wiredLead.error;
+        return !this.lead.data && !this.lead.error;
     }
 
     get hasError() {
-        return !!this.wiredLead.error;
+        return !!this.lead.error;
     }
 
     get region() {
-        return this.getDisplayableFieldValue(LEAD_REGION);
+        return this.getFieldDisplayOrValue(REGION_FIELD);
     }
 
     get industry() {
-        return this.getDisplayableFieldValue(LEAD_INDUSTRY);
+        return this.getFieldDisplayOrValue(INDUSTRY_FIELD);
     }
 
     get leadSource() {
-        return this.getDisplayableFieldValue(LEAD_SOURCE);
+        return this.getFieldDisplayOrValue(LEAD_SOURCE_FIELD);
+    }
+
+    get ownerName() {
+        return this.getFieldDisplayOrValue(OWNER_NAME_FIELD);
     }
 
     get status() {
-        return this.getDisplayableFieldValue(LEAD_STATUS);
+        return this.getFieldDisplayOrValue(STATUS_FIELD);
     }
 
-    getDisplayableFieldValue(fieldReference) {
-        if (!this.wiredLead.data) {
+    getFieldDisplayOrValue(field) {
+        if (!this.lead.data) {
             return '—';
         }
-        return getFieldDisplayValue(this.wiredLead.data, fieldReference)
-            || getFieldValue(this.wiredLead.data, fieldReference)
-            || '—';
+        return getFieldDisplayValue(this.lead.data, field) || getFieldValue(this.lead.data, field) || '—';
     }
 }

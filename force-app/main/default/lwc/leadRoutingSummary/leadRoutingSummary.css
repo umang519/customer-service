@@ -1,0 +1,8 @@
+.lead-routing-summary .summary-title {
+    font-weight: 700;
+}
+
+.lead-routing-summary dt,
+.lead-routing-summary dd {
+    padding-bottom: 0.25rem;
+}

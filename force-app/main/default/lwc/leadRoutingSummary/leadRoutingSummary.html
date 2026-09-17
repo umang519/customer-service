@@ -1,44 +1,37 @@
 <template>
-    <lightning-card title="Lead Routing Summary" icon-name="standard:lead">
+    <div class="slds-box slds-box_x-small slds-theme_default lead-routing-summary">
+        <div class="slds-text-heading_small slds-m-bottom_small summary-title">Routing Summary</div>
+
         <template lwc:if={isLoading}>
-            <div class="slds-p-around_medium">
+            <div class="slds-is-relative slds-p-around_medium">
                 <lightning-spinner alternative-text="Loading lead routing summary" size="small"></lightning-spinner>
             </div>
         </template>
+
         <template lwc:elseif={hasError}>
-            <div class="slds-p-around_medium slds-text-color_error">
-                Unable to load lead routing summary.
+            <div class="slds-text-color_error slds-p-around_small">
+                <lightning-icon icon-name="utility:error" size="small" alternative-text="Error" class="slds-m-right_x-small"></lightning-icon>
+                Unable to load the routing summary. Please contact your administrator.
             </div>
         </template>
+
         <template lwc:else>
-            <div class="slds-p-around_small">
-                <div class="slds-grid slds-wrap">
-                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
-                        <div class="slds-text-title slds-text-color_weak">Region</div>
-                        <div class="slds-text-body_regular">{region}</div>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
-                        <div class="slds-text-title slds-text-color_weak">Industry</div>
-                        <div class="slds-text-body_regular">{industry}</div>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
-                        <div class="slds-text-title slds-text-color_weak">Lead Source</div>
-                        <div class="slds-text-body_regular">{leadSource}</div>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
-                        <div class="slds-text-title slds-text-color_weak">Status</div>
-                        <div class="slds-text-body_regular">{status}</div>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-p-around_xx-small">
-                        <div class="slds-text-title slds-text-color_weak">Owner</div>
-                        <div class="slds-text-body_regular">
-                            <lightning-record-view-form record-id={recordId} object-api-name="Lead">
-                                <lightning-output-field field-name="OwnerId" variant="label-hidden"></lightning-output-field>
-                            </lightning-record-view-form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <dl class="slds-dl_horizontal slds-wrap">
+                <dt class="slds-dl_horizontal__label slds-text-color_weak slds-truncate">Region</dt>
+                <dd class="slds-dl_horizontal__detail slds-truncate">{region}</dd>
+
+                <dt class="slds-dl_horizontal__label slds-text-color_weak slds-truncate">Industry</dt>
+                <dd class="slds-dl_horizontal__detail slds-truncate">{industry}</dd>
+
+                <dt class="slds-dl_horizontal__label slds-text-color_weak slds-truncate">Lead Source</dt>
+                <dd class="slds-dl_horizontal__detail slds-truncate">{leadSource}</dd>
+
+                <dt class="slds-dl_horizontal__label slds-text-color_weak slds-truncate">Owner</dt>
+                <dd class="slds-dl_horizontal__detail slds-truncate">{ownerName}</dd>
+
+                <dt class="slds-dl_horizontal__label slds-text-color_weak slds-truncate">Status</dt>
+                <dd class="slds-dl_horizontal__detail slds-truncate">{status}</dd>
+            </dl>
         </template>
-    </lightning-card>
+    </div>
 </template>
