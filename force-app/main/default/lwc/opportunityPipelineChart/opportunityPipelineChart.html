@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Opportunity Pipeline" icon-name="standard:opportunity">
+        <div class="slds-m-around_medium">
+            <template lwc:if={isLoading}>
+                <div class="slds-text-align_center">
+                    <lightning-spinner alternative-text="Loading pipeline chart..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+            <template lwc:elseif={hasError}>
+                <div class="error-state">
+                    <p class="slds-text-heading_small">Unable to load pipeline data.</p>
+                    <p class="slds-text-color_error">{errorMessage}</p>
+                </div>
+            </template>
+            <template lwc:elseif={hasData}>
+                <div class="chart-container">
+                    <canvas class="chart-canvas" lwc:dom="manual"></canvas>
+                </div>
+            </template>
+            <template lwc:else>
+                <div class="empty-state">
+                    <p class="slds-text-heading_small">No open opportunities found.</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
