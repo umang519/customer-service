@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-p-around_medium">
+        <lightning-card title="Convert Lead" icon-name="standard:lead">
+            <div class="slds-p-around_medium">
+                <template lwc:if={isLoading}>
+                    <lightning-spinner alternative-text="Converting..." size="medium"></lightning-spinner>
+                </template>
+                <template lwc:else>
+                    <lightning-input
+                        label="Opportunity Name"
+                        value={opportunityName}
+                        placeholder="Leave blank to skip opportunity creation"
+                        onchange={handleOpportunityNameChange}>
+                    </lightning-input>
+                    <div class="slds-m-top_medium">
+                        <lightning-button
+                            variant="brand"
+                            label="Convert Lead"
+                            onclick={handleConvert}
+                            disabled={isConvertDisabled}>
+                        </lightning-button>
+                    </div>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

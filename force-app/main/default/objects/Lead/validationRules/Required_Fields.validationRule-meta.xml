@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Fields</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK(Company) || ISBLANK(Email) || ISBLANK(Phone) || ISPICKVAL(Region__c, &apos;&apos;) || ISPICKVAL(Industry, &apos;&apos;)</errorConditionFormula>
+    <errorMessage>Please complete all required fields: Company, Email, Phone, Region, and Industry.</errorMessage>
+</ValidationRule>
