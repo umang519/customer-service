@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_Phone_Format</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(Phone__c)) &amp;&amp; NOT(REGEX(Phone__c, "^[0-9\\s\\-\\(\\)\\+]{7,}$"))</errorConditionFormula>
+    <errorDisplayField>Phone__c</errorDisplayField>
+    <errorMessage>Please enter a valid phone number with at least 7 digits.</errorMessage>
+</ValidationRule>
