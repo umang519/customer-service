@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="Case Summary" icon-name="standard:case">
+        <div class="slds-var-p-horizontal_medium slds-var-p-bottom_medium">
+            <template lwc:if={recordId}>
+                <lightning-record-view-form
+                    object-api-name={caseObject.objectApiName}
+                    record-id={recordId}
+                    density="compact">
+                    <div class="slds-grid slds-wrap slds-gutters case-summary-grid">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <lightning-output-field field-name={caseNumber.fieldApiName}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <lightning-output-field field-name={subject.fieldApiName}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <lightning-output-field field-name={status.fieldApiName}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <lightning-output-field field-name={priority.fieldApiName}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <lightning-output-field field-name={ownerId.fieldApiName}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                            <lightning-output-field field-name={createdDate.fieldApiName}></lightning-output-field>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+            </template>
+            <template lwc:else>
+                <div class="slds-var-p-around_medium slds-text-align_center">
+                    <p>No case record selected.</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

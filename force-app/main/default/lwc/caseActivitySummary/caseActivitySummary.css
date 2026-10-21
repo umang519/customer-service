@@ -1,0 +1,21 @@
+.activity-list {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.activity-item {
+    margin-bottom: 0.75rem;
+}
+
+.activity-item:last-child {
+    margin-bottom: 0;
+}
+
+.activity-subject {
+    font-weight: 600;
+}
+
+.activity-meta {
+    font-size: 0.875rem;
+    color: var(--slds-g-color-neutral-base-30, #747474);
+}

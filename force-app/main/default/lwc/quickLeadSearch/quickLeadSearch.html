@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Quick Lead Search" icon-name="standard:lead">
+        <div class="slds-m-around_medium">
+            <lightning-input
+                type="search"
+                label="Search by name, company, or email"
+                placeholder="Type at least 3 characters..."
+                value={searchTerm}
+                onchange={handleSearchChange}>
+            </lightning-input>
+
+            <template lwc:if={isLoading}>
+                <div class="slds-m-top_medium">
+                    <lightning-spinner alternative-text="Searching leads..." size="small"></lightning-spinner>
+                </div>
+            </template>
+
+            <template lwc:elseif={hasResults}>
+                <div class="slds-m-top_medium">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={leads}
+                        columns={columns}
+                        hide-checkbox-column
+                        onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <template lwc:elseif={showEmptyState}>
+                <div class="slds-m-top_medium slds-text-color_weak">
+                    No leads found. Try a different search term.
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,12 @@
+:host {
+    display: block;
+}
+
+.case-summary-grid {
+    margin-top: var(--slds-g-spacing-2);
+}
+
+lightning-output-field {
+    display: block;
+    padding: var(--slds-g-spacing-1) 0;
+}

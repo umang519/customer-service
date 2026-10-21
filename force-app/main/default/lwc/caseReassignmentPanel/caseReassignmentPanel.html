@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Case Reassignment" icon-name="standard:case">
+        <div class="slds-p-around_medium">
+            <template lwc:if={loading}>
+                <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+            </template>
+            <template lwc:else>
+                <div class="slds-m-bottom_small">
+                    <p><strong>Current Owner:</strong> {currentOwnerLabel}</p>
+                </div>
+                <lightning-input
+                    type="search"
+                    label="Search user or queue"
+                    value={searchTerm}
+                    onchange={handleSearchChange}>
+                </lightning-input>
+                <template lwc:if={hasOwnerOptions}>
+                    <lightning-combobox
+                        label="Select New Owner"
+                        value={selectedOwnerId}
+                        options={ownerOptions}
+                        onchange={handleOwnerSelect}
+                        class="slds-m-top_small">
+                    </lightning-combobox>
+                </template>
+                <div class="slds-m-top_small">
+                    <lightning-button
+                        variant="brand"
+                        label="Reassign"
+                        onclick={handleReassign}
+                        disabled={isReassignDisabled}>
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

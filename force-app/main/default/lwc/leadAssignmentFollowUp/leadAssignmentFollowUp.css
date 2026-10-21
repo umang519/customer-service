@@ -1,0 +1,7 @@
+.lead-card {
+    margin: var(--lwc-spacingSmall, 0.75rem);
+}
+
+.actions {
+    margin-top: 0.75rem;
+}

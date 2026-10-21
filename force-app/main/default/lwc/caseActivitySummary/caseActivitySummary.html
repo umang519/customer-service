@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Case Activity Summary" icon-name="standard:task">
+        <div class="slds-p-horizontal_medium slds-p-vertical_small">
+            <template lwc:if={isLoading}>
+                <div class="slds-align_absolute-center slds-p-around_medium">
+                    <lightning-spinner alternative-text="Loading activities" size="small"></lightning-spinner>
+                </div>
+            </template>
+            <template lwc:elseif={hasError}>
+                <div class="slds-text-color_error slds-p-around_small">
+                    <p>{errorMessage}</p>
+                </div>
+            </template>
+            <template lwc:elseif={hasActivities}>
+                <ul class="slds-list_dotted activity-list">
+                    <template for:each={activities} for:item="activity">
+                        <li key={activity.recordId} class="activity-item">
+                            <div class="activity-subject">{activity.subject}</div>
+                            <div class="activity-meta slds-text-body_small">
+                                <span class="activity-date">{activity.formattedDate}</span>
+                                <span class="activity-owner"> • {activity.ownerName}</span>
+                                <span class="activity-status"> • {activity.status}</span>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+            <template lwc:else>
+                <div class="slds-text-color_weak slds-p-around_small">
+                    No recent activities found.
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

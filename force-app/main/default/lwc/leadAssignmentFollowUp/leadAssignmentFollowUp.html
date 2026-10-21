@@ -1,0 +1,61 @@
+<template>
+    <lightning-card title="Lead Assignment and Follow-Up" icon-name="standard:lead" class="lead-card">
+        <div class="slds-p-around_medium">
+            <template lwc:if={recordId}>
+                <lightning-record-view-form record-id={recordId} object-api-name={objectApiName} density="compact">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={nameField}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={companyField}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={emailField}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={phoneField}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={statusField}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={sourceField}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={industryField}></lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                            <lightning-output-field field-name={ownerField}></lightning-output-field>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+
+                <div class="slds-m-top_medium">
+                    <lightning-record-edit-form record-id={recordId} object-api-name={objectApiName} onsuccess={handleStatusSuccess} onerror={handleError}>
+                        <lightning-input-field field-name={statusField}></lightning-input-field>
+                        <div class="actions">
+                            <lightning-button type="submit" variant="brand" label="Save Status" class="slds-m-right_x-small"></lightning-button>
+                            <lightning-button variant="neutral" label="Assign to Me" onclick={handleAssignToMe} class="slds-m-right_x-small"></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+
+                <div class="slds-m-top_medium slds-box slds-box_x-small">
+                    <h3 class="slds-text-heading_small slds-m-bottom_small">Create Follow-Up Task</h3>
+                    <lightning-input type="text" label="Subject" value={taskSubject} onchange={handleSubjectChange} required></lightning-input>
+                    <lightning-input type="date" label="Due Date" value={taskDate} onchange={handleDateChange} class="slds-m-top_small"></lightning-input>
+                    <div class="slds-m-top_small">
+                        <lightning-button variant="brand" label="Create Follow-Up Task" onclick={handleCreateTask} disabled={isLoading}></lightning-button>
+                    </div>
+                </div>
+            </template>
+            <template lwc:else>
+                <div class="slds-text-color_weak">No lead record selected.</div>
+            </template>
+        </div>
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Processing..." size="small"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>
