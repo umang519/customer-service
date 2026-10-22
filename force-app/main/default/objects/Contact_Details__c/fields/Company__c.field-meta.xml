@@ -4,6 +4,7 @@
     <label>Company</label>
     <referenceTo>Account</referenceTo>
     <relationshipLabel>Contact Details</relationshipLabel>
-    <relationshipName>Contact_Details</relationshipName>
+    <relationshipName>Contact_Details_Company</relationshipName>
+    <deleteConstraint>SetNull</deleteConstraint>
     <type>Lookup</type>
 </CustomField>
