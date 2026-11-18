@@ -25,7 +25,8 @@ public with sharing class LeadAssignmentFollowUpControllerTest {
         Test.stopTest();
 
         System.assertEquals(leadIds.size(), assignedCount, 'All selected leads should be assigned.');
-        for (Lead l : [SELECT OwnerId FROM Lead WHERE Id IN :leadIds]) {
+        List<Lead> updatedLeads = [SELECT OwnerId FROM Lead WHERE Id IN :leadIds];
+        for (Lead l : updatedLeads) {
             System.assertEquals(UserInfo.getUserId(), l.OwnerId, 'Lead owner should be the current user.');
         }
     }
@@ -85,5 +86,23 @@ public with sharing class LeadAssignmentFollowUpControllerTest {
     static void testEmptyInputsReturnZero() {
         System.assertEquals(0, LeadAssignmentFollowUpController.assignLeadToCurrentUser(new List<Id>()), 'Empty lead list should return zero assignments.');
         System.assertEquals(0, LeadAssignmentFollowUpController.createFollowUpTask(new List<Id>(), 'Subject', Date.today()), 'Empty lead list should return zero tasks.');
+    }
+
+    @isTest
+    static void testAssignLeadToCurrentUserGovernorLimits() {
+        List<Lead> leads = [SELECT Id FROM Lead];
+        List<Id> leadIds = new List<Id>();
+        for (Lead l : leads) {
+            leadIds.add(l.Id);
+        }
+
+        Test.startTest();
+        Integer soqlBefore = Limits.getQueries();
+        Integer assignedCount = LeadAssignmentFollowUpController.assignLeadToCurrentUser(leadIds);
+        Integer soqlAfter = Limits.getQueries();
+        Test.stopTest();
+
+        System.assertEquals(leadIds.size(), assignedCount, 'All bulk leads should be assigned.');
+        System.assert((soqlAfter - soqlBefore) <= 2, 'assignLeadToCurrentUser should use a bounded number of SOQL queries.');
     }
 }
